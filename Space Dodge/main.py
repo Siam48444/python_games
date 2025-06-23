@@ -5,6 +5,7 @@ import random
 
 WIDTH, HEIGHT = 1000, 600
 PLAYER_WIDTH, PLAYER_HEIGHT = 40, 60
+PLAYER_VELOCITY = 3
 WINDOW = pygame.display.set_mode((WIDTH, HEIGHT))
 TITLE = pygame.display.set_caption("Space Dodge")
 
@@ -26,9 +27,11 @@ def main():
 
         keys = pygame.key.get_pressed()
         if keys[pygame.K_LEFT]:
-            player.x -=
+            player.x -= PLAYER_VELOCITY
+        if keys[pygame.K_RIGHT]:
+            player.x += PLAYER_VELOCITY
 
-        draw()
+        draw(player)
     
     pygame.quit()
 
