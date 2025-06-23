@@ -7,6 +7,7 @@ pygame.font.init()
 
 WIDTH, HEIGHT = 1000, 600
 PLAYER_WIDTH, PLAYER_HEIGHT = 40, 60
+STAR_WIDTH, STAR_HEIGHT = 5, 10
 PLAYER_VELOCITY = 5
 WINDOW = pygame.display.set_mode((WIDTH, HEIGHT))
 TITLE = pygame.display.set_caption("Space Dodge")
@@ -21,12 +22,18 @@ def main():
     clock = pygame.time.Clock()
     start_time = time.time()
     elapsed_time = 0
+
+    star_add = 2000
+    star_next = 0
     
     running = True
     while running:
-        clock.tick(120)
+        star_next += clock.tick(120)
         elapsed_time = time.time() - start_time
-        print(elapsed_time)
+
+        if star_next > star_add:
+            for _ in range(3):
+                start_x = random.randint(0, WIDTH - STAR_WIDTH)
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
