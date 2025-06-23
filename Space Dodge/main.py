@@ -35,6 +35,7 @@ def main():
 
 
 def draw(player):
+    WINDOW.fill("black")
     pygame.draw.rect(WINDOW, "red", player)
     pygame.display.update()
 
