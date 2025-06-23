@@ -21,7 +21,7 @@ def main():
         draw(player)
 
         keys = pygame.key.get_pressed()
-        
+
     
     pygame.quit()
 
