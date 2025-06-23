@@ -1,6 +1,8 @@
 import pygame
 import time
 import random
+import math
+pygame.font.init()
 
 
 WIDTH, HEIGHT = 1000, 600
@@ -8,6 +10,7 @@ PLAYER_WIDTH, PLAYER_HEIGHT = 40, 60
 PLAYER_VELOCITY = 5
 WINDOW = pygame.display.set_mode((WIDTH, HEIGHT))
 TITLE = pygame.display.set_caption("Space Dodge")
+FONT = pygame.font.SysFont("Inter", 20)
 
 
 def main():
@@ -36,13 +39,16 @@ def main():
         if keys[pygame.K_RIGHT] and player.x <= WIDTH - PLAYER_WIDTH:
             player.x += PLAYER_VELOCITY
 
-        draw(player)
+        draw(player, elapsed_time)
     
     pygame.quit()
 
 
-def draw(player):
+def draw(player, elapsed_time):
     WINDOW.fill("black")
+
+    time_text = FONT.render(f"Time: {math.floor(elapsed_time)}s", 1, "white")
+
     pygame.draw.rect(WINDOW, "red", player)
     pygame.display.update()
 
