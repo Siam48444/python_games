@@ -10,7 +10,12 @@ TITLE = pygame.display.set_caption("Space Dodge")
 
 
 def main():
-    player = pygame.Rect((WIDTH - PLAYER_WIDTH) / 2, HEIGHT - PLAYER_HEIGHT - 20, PLAYER_WIDTH, PLAYER_HEIGHT)
+    player = pygame.Rect(
+        (WIDTH - PLAYER_WIDTH) / 2, 
+        HEIGHT - PLAYER_HEIGHT - 20, 
+        PLAYER_WIDTH, 
+        PLAYER_HEIGHT
+    )
     
     running = True
     while running:
@@ -18,10 +23,12 @@ def main():
             if event.type == pygame.QUIT:
                 running = False
                 break        
-        draw(player)
 
         keys = pygame.key.get_pressed()
+        if keys[pygame.K_LEFT]:
+            player.x -=
 
+        draw()
     
     pygame.quit()
 
