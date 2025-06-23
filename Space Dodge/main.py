@@ -16,9 +16,15 @@ def main():
         PLAYER_WIDTH, PLAYER_HEIGHT
     )
     clock = pygame.time.Clock()
+    start_time = time.time()
+    elapsed_time = 0
     
     running = True
     while running:
+        clock.tick(120)
+        elapsed_time = time.time() - start_time
+        print(elapsed_time)
+
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 running = False
@@ -30,7 +36,6 @@ def main():
         if keys[pygame.K_RIGHT] and player.x <= WIDTH - PLAYER_WIDTH:
             player.x += PLAYER_VELOCITY
 
-        clock.tick(120)
         draw(player)
     
     pygame.quit()
