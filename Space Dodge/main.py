@@ -12,10 +12,8 @@ TITLE = pygame.display.set_caption("Space Dodge")
 
 def main():
     player = pygame.Rect(
-        (WIDTH - PLAYER_WIDTH) / 2, 
-        HEIGHT - PLAYER_HEIGHT - 20, 
-        PLAYER_WIDTH, 
-        PLAYER_HEIGHT
+        (WIDTH - PLAYER_WIDTH) / 2, HEIGHT - PLAYER_HEIGHT - 20, 
+        PLAYER_WIDTH, PLAYER_HEIGHT
     )
     
     running = True
