@@ -25,6 +25,7 @@ def main():
 
     star_add = 2000
     star_next = 0
+    stars = []
     
     running = True
     while running:
@@ -34,6 +35,8 @@ def main():
         if star_next > star_add:
             for _ in range(3):
                 start_x = random.randint(0, WIDTH - STAR_WIDTH)
+                star = pygame.Rect(start_x, 0, STAR_WIDTH, STAR_HEIGHT)
+                stars.append(star)
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
