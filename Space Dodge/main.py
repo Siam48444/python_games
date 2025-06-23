@@ -47,7 +47,8 @@ def main():
 def draw(player, elapsed_time):
     WINDOW.fill("black")
 
-    time_text = FONT.render(f"Time: {math.floor(elapsed_time)}s", 1, "white")
+    time_text = FONT.render(f"Time: {math.floor(elapsed_time)}s", 2, "white")
+    WINDOW.blit(time_text, (0, 0))
 
     pygame.draw.rect(WINDOW, "red", player)
     pygame.display.update()
