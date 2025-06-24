@@ -7,10 +7,10 @@ pygame.font.init()
 
 WIDTH, HEIGHT = 1000, 600
 PLAYER_WIDTH, PLAYER_HEIGHT = 40, 60
-STAR_WIDTH, STAR_HEIGHT = 5, 10
+STAR_WIDTH, STAR_HEIGHT = 10, 30
 
 PLAYER_VELOCITY = 5
-STAR_VELOCITY = 10
+STAR_VELOCITY = 7
 
 WINDOW = pygame.display.set_mode((WIDTH, HEIGHT))
 TITLE = pygame.display.set_caption("Space Dodge")
@@ -30,7 +30,9 @@ def main():
     star_next = 0
     stars = []
     
+    hit = False
     running = True
+    
     while running:
         star_next += clock.tick(120)
         elapsed_time = time.time() - start_time
@@ -64,18 +66,22 @@ def main():
                 hit = True
                 break
 
-        draw(player, elapsed_time)
+        draw(player, elapsed_time, stars)
     
     pygame.quit()
 
 
-def draw(player, elapsed_time):
+def draw(player, elapsed_time, stars):
     WINDOW.fill("black")
 
     time_text = FONT.render(f"Time: {math.floor(elapsed_time)}s", 1, "white")
     WINDOW.blit(time_text, (0, 0))
 
     pygame.draw.rect(WINDOW, "red", player)
+
+    for star in stars:
+        pygame.draw.rect(WINDOW, "white", star)
+
     pygame.display.update()
 
 
