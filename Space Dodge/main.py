@@ -10,7 +10,7 @@ PLAYER_WIDTH, PLAYER_HEIGHT = 40, 60
 STAR_WIDTH, STAR_HEIGHT = 10, 30
 
 PLAYER_VELOCITY = 5
-STAR_VELOCITY = 7
+STAR_VELOCITY = 6
 
 WINDOW = pygame.display.set_mode((WIDTH, HEIGHT))
 TITLE = pygame.display.set_caption("Space Dodge")
@@ -65,6 +65,10 @@ def main():
                 stars.remove(star)
                 hit = True
                 break
+
+        if hit:
+            lost_text = FONT.render("You lost!", 1, "white")
+            WINDOW.blit(lost_text, (WIDTH / 2, HEIGHT / 2))
 
         draw(player, elapsed_time, stars)
     
