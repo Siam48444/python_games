@@ -69,6 +69,9 @@ def main():
         if hit:
             lost_text = FONT.render("You lost!", 1, "white")
             WINDOW.blit(lost_text, (WIDTH / 2, HEIGHT / 2))
+            pygame.display.update()
+            pygame.time.delay(5000)
+            break
 
         draw(player, elapsed_time, stars)
     
