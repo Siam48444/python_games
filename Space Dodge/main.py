@@ -15,7 +15,7 @@ STAR_VELOCITY = 6
 WINDOW = pygame.display.set_mode((WIDTH, HEIGHT))
 TITLE = pygame.display.set_caption("Space Dodge")
 
-TIME_FONT = pygame.font.SysFont("Arial", 20)
+TIME_FONT = pygame.font.SysFont("Arial", 25)
 LOST_FONT = pygame.font.SysFont("Arial", 40)    
 
 
@@ -29,7 +29,7 @@ def main():
     start_time = time.time()
     elapsed_time = 0
 
-    star_add = 2000
+    star_add = 1000
     star_next = 0
     stars = []
     
@@ -41,12 +41,12 @@ def main():
         elapsed_time = time.time() - start_time
 
         if star_next > star_add:
-            for _ in range(3):
+            for _ in range(4):
                 start_x = random.randint(0, WIDTH - STAR_WIDTH)
                 star = pygame.Rect(start_x, -STAR_HEIGHT, STAR_WIDTH, STAR_HEIGHT)
                 stars.append(star)
 
-            star_add = max(200, star_add - 50 )
+            star_add = max(200, star_add - 100)
             star_next = 0
 
         for event in pygame.event.get():
@@ -64,7 +64,7 @@ def main():
             star.y += STAR_VELOCITY
             if star.y > HEIGHT:
                 stars.remove(star)
-            elif star.y > player.y and star.colliderect(player):
+            elif star.y - STAR_HEIGHT > player.y and star.colliderect(player):
                 stars.remove(star)
                 hit = True
                 break
