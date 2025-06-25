@@ -14,7 +14,10 @@ STAR_VELOCITY = 6
 
 WINDOW = pygame.display.set_mode((WIDTH, HEIGHT))
 TITLE = pygame.display.set_caption("Space Dodge")
-FONT = pygame.font.SysFont("Inter", 20)
+
+TIME_FONT = pygame.font.SysFont("Arial", 20)
+LOST_FONT = pygame.font.SysFont("Arial", 40)    
+
 
 
 def main():
@@ -67,10 +70,10 @@ def main():
                 break
 
         if hit:
-            lost_text = FONT.render("You lost!", 1, "white")
-            WINDOW.blit(lost_text, (WIDTH / 2, HEIGHT / 2))
+            lost_text = LOST_FONT.render("You lost!", 1, "white")
+            WINDOW.blit(lost_text, (WIDTH / 2 - lost_text.get_width() / 2, HEIGHT / 2))
             pygame.display.update()
-            pygame.time.delay(5000)
+            pygame.time.delay(3000)
             break
 
         draw(player, elapsed_time, stars)
@@ -81,7 +84,7 @@ def main():
 def draw(player, elapsed_time, stars):
     WINDOW.fill("black")
 
-    time_text = FONT.render(f"Time: {math.floor(elapsed_time)}s", 1, "white")
+    time_text = TIME_FONT.render(f"Time: {math.floor(elapsed_time)}s", 1, "white")
     WINDOW.blit(time_text, (0, 0))
 
     pygame.draw.rect(WINDOW, "red", player)
