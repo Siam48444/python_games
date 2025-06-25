@@ -10,7 +10,7 @@ PLAYER_WIDTH, PLAYER_HEIGHT = 40, 60
 STAR_WIDTH, STAR_HEIGHT = 10, 30
 
 PLAYER_VELOCITY = 5
-STAR_VELOCITY = 6
+STAR_VELOCITY = 3
 
 WINDOW = pygame.display.set_mode((WIDTH, HEIGHT))
 TITLE = pygame.display.set_caption("Space Dodge")
@@ -41,12 +41,12 @@ def main():
         elapsed_time = time.time() - start_time
 
         if star_next > star_add:
-            for _ in range(4):
+            for _ in range(3):
                 start_x = random.randint(0, WIDTH - STAR_WIDTH)
                 star = pygame.Rect(start_x, -STAR_HEIGHT, STAR_WIDTH, STAR_HEIGHT)
                 stars.append(star)
 
-            star_add = max(200, star_add - 100)
+            star_add = max(200, star_add - 50)
             star_next = 0
 
         for event in pygame.event.get():
@@ -70,7 +70,7 @@ def main():
                 break
 
         if hit:
-            lost_text = LOST_FONT.render("You lost!", 1, "white")
+            lost_text = LOST_FONT.render(f"You lost! Survived: {math.floor(elapsed_time)}s", 1, "white")
             WINDOW.blit(lost_text, (WIDTH / 2 - lost_text.get_width() / 2, HEIGHT / 2))
             pygame.display.update()
             pygame.time.delay(3000)
