@@ -20,6 +20,7 @@ MIDDLE_BAR = pygame.Rect((WIDTH - MIDDLE_BAR_THICKNESS) / 2, 0, MIDDLE_BAR_THICK
 
 BULLET_WIDTH, BULLET_HEIGHT = 20, 10
 BULLET_VELOCITY = 10
+MAX_BULLETS = 3
 
 BG_COLOR = (255, 255, 255)
 FPS = 120
@@ -41,21 +42,22 @@ def main():
 				running = False
 
 			if event.type == pygame.KEYDOWN:
-				if event.type == pygame.K_LCTRL:
+				if event.key == pygame.K_RCTRL and len(yellow_bullets) < MAX_BULLETS:
 					bullet = pygame.Rect(
 						yellow_spaceship.x + yellow_spaceship.width - 10, 
 						yellow_spaceship.y + yellow_spaceship.height / 2, 
 						BULLET_WIDTH, BULLET_HEIGHT
 					)
 					yellow_bullets.append(bullet)
-				if event.type == pygame.K_RCTRL:
+				if event.key == pygame.K_LCTRL and len(red_bullets) < MAX_BULLETS:
 					bullet = pygame.Rect(
 						red_spaceship.x + red_spaceship.width - 10, 
 						red_spaceship.y + red_spaceship.height / 2, 
 						BULLET_WIDTH, BULLET_HEIGHT
 					)
-					yellow_bullets.append(bullet)
+					red_bullets.append(bullet)
 
+		print(red_bullets, yellow_bullets)
 		keys_pressed = pygame.key.get_pressed()
 		red_movement(keys_pressed, red_spaceship)
 		yellow_movement(keys_pressed, yellow_spaceship)
