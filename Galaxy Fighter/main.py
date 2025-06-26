@@ -5,6 +5,8 @@ WIDTH, HEIGHT = 1000, 800
 WINDOW = pygame.display.set_mode((WIDTH, HEIGHT))
 TITLE = pygame.display.set_caption("Galaxy Fighter")
 
+BLACK = (0, 0, 0)
+
 
 def main():
 	running = True
@@ -12,7 +14,14 @@ def main():
 		for event in pygame.event.get():
 			if event.type == pygame.QUIT:
 				running = False
+		draw_window()
+
 	pygame.quit()
+
+
+def draw_window():
+	WINDOW.fill(BLACK)
+	pygame.display.update()	
 
 
 
