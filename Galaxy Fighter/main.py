@@ -16,13 +16,15 @@ SPACESHIP_RED = pygame.transform.rotate(pygame.transform.scale(SPACESHIP_RED_IMA
 
 MIDDLE_BAR_COLOR = (0, 0, 0)
 MIDDLE_BAR_THICKNESS = 3
-MIDDLE_BAR = pygame.Rect((WIDTH - MIDDLE_BAR_THICKNESS) / 2, 0, MIDDLE_BAR_THICKNESS, HEIGHT)
+MIDDLE_BAR = pygame.Rect((WIDTH - MIDDLE_BAR_THICKNESS) // 2, 0, MIDDLE_BAR_THICKNESS, HEIGHT)
 
 BULLET_WIDTH, BULLET_HEIGHT = 20, 10
 BULLET_VELOCITY = 10
 MAX_BULLETS = 3
 
 BG_COLOR = (255, 255, 255)
+RED_COLOR = (255, 0, 0)
+YELLOW_COLOR = (222, 255, 0)
 FPS = 120
 
 
@@ -45,14 +47,14 @@ def main():
 				if event.key == pygame.K_RCTRL and len(yellow_bullets) < MAX_BULLETS:
 					bullet = pygame.Rect(
 						yellow_spaceship.x + yellow_spaceship.width - 10, 
-						yellow_spaceship.y + yellow_spaceship.height / 2, 
+						yellow_spaceship.y + yellow_spaceship.height // 2, 
 						BULLET_WIDTH, BULLET_HEIGHT
 					)
 					yellow_bullets.append(bullet)
 				if event.key == pygame.K_LCTRL and len(red_bullets) < MAX_BULLETS:
 					bullet = pygame.Rect(
 						red_spaceship.x + red_spaceship.width - 10, 
-						red_spaceship.y + red_spaceship.height / 2, 
+						red_spaceship.y + red_spaceship.height // 2, 
 						BULLET_WIDTH, BULLET_HEIGHT
 					)
 					red_bullets.append(bullet)
@@ -63,7 +65,7 @@ def main():
 
 		handle_bullets(red_bullets, yellow_bullets, red_spaceship, yellow_spaceship)
 
-		draw_window(red_spaceship, yellow_spaceship)
+		draw_window(red_spaceship, yellow_spaceship, red_bullets, yellow_bullets)
 
 	pygame.quit()
 
@@ -101,11 +103,17 @@ def handle_bullets(red_bullets, yellow_bullets, red, yellow):
 			yellow_bullets.remove(bullet)
 
 
-def draw_window(red, yellow):
+def draw_window(red, yellow, red_bullets, yellow_bullets):
 	WINDOW.fill(BG_COLOR)
 	WINDOW.blit(SPACESHIP_RED, (red.x, red.y))
 	WINDOW.blit(SPACESHIP_YELLOW, (yellow.x, yellow.y))
 	pygame.draw.rect(WINDOW, MIDDLE_BAR_COLOR, MIDDLE_BAR)
+
+	for bullet in red_bullets:
+		pygame.draw.rect(WINDOW, RED_COLOR, bullet)
+	for bullet in yellow_bullets:
+		pygame.draw.rect(WINDOW, YELLOW_COLOR, bullet)
+
 	pygame.display.update()	
 
 
