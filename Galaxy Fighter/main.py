@@ -9,8 +9,11 @@ TITLE = pygame.display.set_caption("Galaxy Fighter")
 BG_COLOR = (255, 255, 255)
 FPS = 60
 
-SPACESHIP_YELLOW = pygame.image.load(os.path.join("Assets", "Images", "spaceship_yellow.png"))
-SPACESHIP_RED = pygame.image.load(os.path.join("Assets", "Images", "spaceship_red.png"))
+SPACESHIP_YELLOW_IMAGE = pygame.image.load(os.path.join("Assets", "Images", "spaceship_yellow.png"))
+SPACESHIP_RED_IMAGE = pygame.image.load(os.path.join("Assets", "Images", "spaceship_red.png"))
+
+SPACESHIP_YELLOW = pygame.transform.scale(SPACESHIP_YELLOW_IMAGE, (55, 50))
+SPACESHIP_RED = pygame.transform.scale(SPACESHIP_RED_IMAGE, (55, 50))
 
 
 def main():
@@ -29,6 +32,7 @@ def main():
 
 def draw_window():
 	WINDOW.fill(BG_COLOR)
+	WINDOW.blit(SPACESHIP_RED, (0, 0))
 	pygame.display.update()	
 
 
