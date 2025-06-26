@@ -8,30 +8,53 @@ TITLE = pygame.display.set_caption("Galaxy Fighter")
 
 SPACESHIP_WIDTH, SPACESHIP_HEIGHT = 70, 50
 SPACESHIP_VELOCITY = 5
-BG_COLOR = (255, 255, 255)
-MIDDLE_BAR_COLOR = (0, 0, 0)
-MIDDLE_BAR_THICKNESS = 3
-MIDDLE_BAR = pygame.Rect((WIDTH - MIDDLE_BAR_THICKNESS) / 2, 0, MIDDLE_BAR_THICKNESS, HEIGHT)
-FPS = 120
 
 SPACESHIP_YELLOW_IMAGE = pygame.image.load(os.path.join("Assets", "Images", "spaceship_yellow.png"))
 SPACESHIP_RED_IMAGE = pygame.image.load(os.path.join("Assets", "Images", "spaceship_red.png"))
 SPACESHIP_YELLOW = pygame.transform.rotate(pygame.transform.scale(SPACESHIP_YELLOW_IMAGE, (SPACESHIP_WIDTH, SPACESHIP_HEIGHT)), -90)
 SPACESHIP_RED = pygame.transform.rotate(pygame.transform.scale(SPACESHIP_RED_IMAGE, (SPACESHIP_WIDTH, SPACESHIP_HEIGHT)), 90)
 
+MIDDLE_BAR_COLOR = (0, 0, 0)
+MIDDLE_BAR_THICKNESS = 3
+MIDDLE_BAR = pygame.Rect((WIDTH - MIDDLE_BAR_THICKNESS) / 2, 0, MIDDLE_BAR_THICKNESS, HEIGHT)
+
+BULLET_WIDTH, BULLET_HEIGHT = 20, 10
+BULLET_VELOCITY = 10
+
+BG_COLOR = (255, 255, 255)
+FPS = 120
 
 
 def main():
 	clock = pygame.time.Clock()
+	
 	red_spaceship = pygame.Rect(50, (HEIGHT - SPACESHIP_HEIGHT) / 2, SPACESHIP_WIDTH, SPACESHIP_HEIGHT)
 	yellow_spaceship = pygame.Rect(WIDTH - SPACESHIP_WIDTH - 50, (HEIGHT - SPACESHIP_HEIGHT) / 2, SPACESHIP_WIDTH, SPACESHIP_HEIGHT)
-
+	red_bullets = []
+	yellow_bullets = []
+	
 	running = True
 	while running:
 		clock.tick(FPS)
 		for event in pygame.event.get():
 			if event.type == pygame.QUIT:
 				running = False
+
+			if event.type == pygame.KEYDOWN:
+				if event.type == pygame.K_LCTRL:
+					bullet = pygame.Rect(
+						yellow_spaceship.x + yellow_spaceship.width - 10, 
+						yellow_spaceship.y + yellow_spaceship.height / 2, 
+						BULLET_WIDTH, BULLET_HEIGHT
+					)
+					yellow_bullets.append(bullet)
+				if event.type == pygame.K_RCTRL:
+					bullet = pygame.Rect(
+						red_spaceship.x + red_spaceship.width - 10, 
+						red_spaceship.y + red_spaceship.height / 2, 
+						BULLET_WIDTH, BULLET_HEIGHT
+					)
+					yellow_bullets.append(bullet)
 
 		keys_pressed = pygame.key.get_pressed()
 		red_movement(keys_pressed, red_spaceship)
