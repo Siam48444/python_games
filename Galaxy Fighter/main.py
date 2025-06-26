@@ -46,15 +46,15 @@ def main():
 			if event.type == pygame.KEYDOWN:
 				if event.key == pygame.K_RCTRL and len(yellow_bullets) < MAX_BULLETS:
 					bullet = pygame.Rect(
-						yellow_spaceship.x + yellow_spaceship.width - 10, 
-						yellow_spaceship.y + yellow_spaceship.height // 2, 
+						yellow_spaceship.x, 
+						yellow_spaceship.y + yellow_spaceship.height / 2 + BULLET_HEIGHT / 2, 
 						BULLET_WIDTH, BULLET_HEIGHT
 					)
 					yellow_bullets.append(bullet)
 				if event.key == pygame.K_LCTRL and len(red_bullets) < MAX_BULLETS:
 					bullet = pygame.Rect(
-						red_spaceship.x + red_spaceship.width - 10, 
-						red_spaceship.y + red_spaceship.height // 2, 
+						red_spaceship.x + red_spaceship.width - BULLET_WIDTH * 2, 
+						red_spaceship.y + red_spaceship.height / 2 + BULLET_HEIGHT / 2, 
 						BULLET_WIDTH, BULLET_HEIGHT
 					)
 					red_bullets.append(bullet)
@@ -97,9 +97,14 @@ def handle_bullets(red_bullets, yellow_bullets, red, yellow):
 		bullet.x += BULLET_VELOCITY
 		if yellow.colliderect(bullet):
 			red_bullets.remove(bullet)
+		elif bullet.x > WIDTH:
+			red_bullets.remove(bullet)
+
 	for bullet in yellow_bullets:
 		bullet.x -= BULLET_VELOCITY
 		if red.colliderect(bullet):
+			yellow_bullets.remove(bullet)
+		elif bullet.x < 0:
 			yellow_bullets.remove(bullet)
 
 
