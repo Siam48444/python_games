@@ -29,10 +29,8 @@ def main():
 				running = False
 
 		keys_pressed = pygame.key.get_pressed()
-		if keys_pressed[pygame.K_w] and red_spaceship.y > 0:
-			red_spaceship.y -= SPACESHIP_VELOCITY
-		if keys_pressed[pygame.K_s] and red_spaceship.y < HEIGHT - SPACESHIP_WIDTH:
-			red_spaceship.y += SPACESHIP_VELOCITY
+		red_movement(keys_pressed, red_spaceship)
+		yellow_movement(keys_pressed, yellow_spaceship)
 
 		draw_window(red_spaceship, yellow_spaceship)
 
@@ -44,6 +42,28 @@ def draw_window(red, yellow):
 	WINDOW.blit(SPACESHIP_RED, (red.x, red.y))
 	WINDOW.blit(SPACESHIP_YELLOW, (yellow.x, yellow.y))
 	pygame.display.update()	
+
+
+def red_movement(keys_pressed, red):
+	if keys_pressed[pygame.K_w] and red.y > 0:
+		red.y -= SPACESHIP_VELOCITY
+	if keys_pressed[pygame.K_s] and red.y < HEIGHT - SPACESHIP_WIDTH:
+		red.y += SPACESHIP_VELOCITY
+	if keys_pressed[pygame.K_a] and red.x > 0:
+		red.x -= SPACESHIP_VELOCITY
+	if keys_pressed[pygame.K_d] and red.x < (WIDTH / 2) - SPACESHIP_HEIGHT:
+		red.x += SPACESHIP_VELOCITY
+
+
+def yellow_movement(keys_pressed, yellow):
+	if keys_pressed[pygame.K_UP] and yellow.y > 0:
+		yellow.y -= SPACESHIP_VELOCITY
+	if keys_pressed[pygame.K_DOWN] and yellow.y < HEIGHT - SPACESHIP_WIDTH:
+		yellow.y += SPACESHIP_VELOCITY
+	if keys_pressed[pygame.K_LEFT] and yellow.x > WIDTH / 2:
+		yellow.x -= SPACESHIP_VELOCITY
+	if keys_pressed[pygame.K_RIGHT] and yellow.x < WIDTH - SPACESHIP_HEIGHT:
+		yellow.x += SPACESHIP_VELOCITY
 
 
 
