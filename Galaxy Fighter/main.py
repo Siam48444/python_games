@@ -3,17 +3,22 @@ import os
 
 
 WIDTH, HEIGHT = 1000, 800
-SPACESHIP_WIDTH, SPACESHIP_HEIGHT = 70, 50
-SPACESHIP_VELOCITY = 5
 WINDOW = pygame.display.set_mode((WIDTH, HEIGHT))
 TITLE = pygame.display.set_caption("Galaxy Fighter")
+
+SPACESHIP_WIDTH, SPACESHIP_HEIGHT = 70, 50
+SPACESHIP_VELOCITY = 5
 BG_COLOR = (255, 255, 255)
+MIDDLE_BAR_COLOR = (0, 0, 0)
+MIDDLE_BAR_THICKNESS = 3
+MIDDLE_BAR = pygame.Rect((WIDTH - MIDDLE_BAR_THICKNESS) / 2, 0, MIDDLE_BAR_THICKNESS, HEIGHT)
 FPS = 120
 
 SPACESHIP_YELLOW_IMAGE = pygame.image.load(os.path.join("Assets", "Images", "spaceship_yellow.png"))
 SPACESHIP_RED_IMAGE = pygame.image.load(os.path.join("Assets", "Images", "spaceship_red.png"))
 SPACESHIP_YELLOW = pygame.transform.rotate(pygame.transform.scale(SPACESHIP_YELLOW_IMAGE, (SPACESHIP_WIDTH, SPACESHIP_HEIGHT)), -90)
 SPACESHIP_RED = pygame.transform.rotate(pygame.transform.scale(SPACESHIP_RED_IMAGE, (SPACESHIP_WIDTH, SPACESHIP_HEIGHT)), 90)
+
 
 
 def main():
@@ -37,13 +42,6 @@ def main():
 	pygame.quit()
 
 
-def draw_window(red, yellow):
-	WINDOW.fill(BG_COLOR)
-	WINDOW.blit(SPACESHIP_RED, (red.x, red.y))
-	WINDOW.blit(SPACESHIP_YELLOW, (yellow.x, yellow.y))
-	pygame.display.update()	
-
-
 def red_movement(keys_pressed, red):
 	if keys_pressed[pygame.K_w] and red.y > 0:
 		red.y -= SPACESHIP_VELOCITY
@@ -64,6 +62,14 @@ def yellow_movement(keys_pressed, yellow):
 		yellow.x -= SPACESHIP_VELOCITY
 	if keys_pressed[pygame.K_RIGHT] and yellow.x < WIDTH - SPACESHIP_HEIGHT:
 		yellow.x += SPACESHIP_VELOCITY
+
+
+def draw_window(red, yellow):
+	WINDOW.fill(BG_COLOR)
+	WINDOW.blit(SPACESHIP_RED, (red.x, red.y))
+	WINDOW.blit(SPACESHIP_YELLOW, (yellow.x, yellow.y))
+	pygame.draw.rect(WINDOW, MIDDLE_BAR_COLOR, MIDDLE_BAR)
+	pygame.display.update()	
 
 
 
