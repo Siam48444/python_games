@@ -57,10 +57,11 @@ def main():
 					)
 					red_bullets.append(bullet)
 
-		print(red_bullets, yellow_bullets)
 		keys_pressed = pygame.key.get_pressed()
 		red_movement(keys_pressed, red_spaceship)
 		yellow_movement(keys_pressed, yellow_spaceship)
+
+		handle_bullets(red_bullets, yellow_bullets, red_spaceship, yellow_spaceship)
 
 		draw_window(red_spaceship, yellow_spaceship)
 
@@ -87,6 +88,17 @@ def yellow_movement(keys_pressed, yellow):
 		yellow.x -= SPACESHIP_VELOCITY
 	if keys_pressed[pygame.K_RIGHT] and yellow.x < WIDTH - SPACESHIP_HEIGHT:
 		yellow.x += SPACESHIP_VELOCITY
+
+
+def handle_bullets(red_bullets, yellow_bullets, red, yellow):
+	for bullet in red_bullets:
+		bullet.x += BULLET_VELOCITY
+		if yellow.colliderect(bullet):
+			red_bullets.remove(bullet)
+	for bullet in yellow_bullets:
+		bullet.x -= BULLET_VELOCITY
+		if red.colliderect(bullet):
+			yellow_bullets.remove(bullet)
 
 
 def draw_window(red, yellow):
