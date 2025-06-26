@@ -3,6 +3,7 @@ import pygame
 
 WIDTH, HEIGHT = 1000, 800
 WINDOW = pygame.display.set_mode((WIDTH, HEIGHT))
+TITLE = pygame.display.set_caption("Galaxy Fighter")
 
 
 def main():
@@ -12,6 +13,7 @@ def main():
 			if event.type == pygame.QUIT:
 				running = False
 	pygame.quit()
+
 
 
 
