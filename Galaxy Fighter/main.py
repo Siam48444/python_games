@@ -28,7 +28,9 @@ RED_COLOR = (255, 0, 0)
 YELLOW_COLOR = (222, 255, 0)
 FPS = 120
 MAX_HEALTH = 5
-LOST_FONT = pygame.font.SysFont('comicsans', 40)
+
+SCORE_FONT = pygame.font.SysFont('Arial', 30)
+LOST_FONT = pygame.font.SysFont('Arial', 80)
 
 
 def main():
@@ -73,12 +75,12 @@ def main():
 
 		draw_window(red_spaceship, yellow_spaceship, red_bullets, yellow_bullets, red_health, yellow_health)
 
-		# if red_health <= 0:
-		# 	draw_winner("Yellow Wins!")
-		# 	break
-		# elif yellow_health <= 0:
-		# 	draw_winner("Red Wins!")
-		# 	break
+		if red_health <= 0:
+			draw_winner("Yellow Wins!")
+			break
+		elif yellow_health <= 0:
+			draw_winner("Red Wins!")
+			break
 
 	pygame.quit()
 
@@ -125,6 +127,13 @@ def handle_bullets(red_bullets, yellow_bullets, red, yellow, red_health, yellow_
 	return red_health, yellow_health
 
 
+def draw_winner(text):
+	win_text = LOST_FONT.render(text, True, (0, 0, 0))
+	WINDOW.blit(win_text, ((WIDTH - win_text.get_width()) / 2, (HEIGHT - win_text.get_height()) / 2))
+	pygame.display.update()
+	pygame.time.delay(3000)
+
+
 def draw_window(red, yellow, red_bullets, yellow_bullets, red_health, yellow_health):
 	WINDOW.fill(BG_COLOR)
 	WINDOW.blit(SPACESHIP_RED, (red.x, red.y))
@@ -136,8 +145,8 @@ def draw_window(red, yellow, red_bullets, yellow_bullets, red_health, yellow_hea
 	for bullet in yellow_bullets:
 		pygame.draw.rect(WINDOW, YELLOW_COLOR, bullet)
 
-	red_health_text = LOST_FONT.render(f"Health: {red_health}", True, RED_COLOR)
-	yellow_health_text = LOST_FONT.render(f"Health: {yellow_health}", True, YELLOW_COLOR)
+	red_health_text = SCORE_FONT.render(f"Health: {red_health}", True, RED_COLOR)
+	yellow_health_text = SCORE_FONT.render(f"Health: {yellow_health}", True, YELLOW_COLOR)
 	WINDOW.blit(red_health_text, (10, 10))
 	WINDOW.blit(yellow_health_text, (WIDTH - yellow_health_text.get_width() - 10, 10))
 
