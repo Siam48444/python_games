@@ -15,7 +15,7 @@ SPACESHIP_RED_IMAGE = pygame.image.load(os.path.join("Assets", "Images", "spaces
 SPACESHIP_YELLOW = pygame.transform.rotate(pygame.transform.scale(SPACESHIP_YELLOW_IMAGE, (SPACESHIP_WIDTH, SPACESHIP_HEIGHT)), -90)
 SPACESHIP_RED = pygame.transform.rotate(pygame.transform.scale(SPACESHIP_RED_IMAGE, (SPACESHIP_WIDTH, SPACESHIP_HEIGHT)), 90)
 
-MIDDLE_BAR_COLOR = (0, 0, 0)
+MIDDLE_BAR_COLOR = (169, 169, 169)
 MIDDLE_BAR_THICKNESS = 3
 MIDDLE_BAR = pygame.Rect((WIDTH - MIDDLE_BAR_THICKNESS) // 2, 0, MIDDLE_BAR_THICKNESS, HEIGHT)
 
