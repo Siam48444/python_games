@@ -5,6 +5,10 @@ import time
 pygame.font.init()
 
 
+WIDTH, HEIGHT = 800, 800
+WINDOW = pygame.display.set_mode((WIDTH, HEIGHT))
+TITLE = pygame.display.set_caption("Space Shooter")
+
 # Load the images
 RED_SPACESHIP = pygame.image.load(os.path.join("assets", "pixel_ship_red_small.png"))
 GREEN_SPACESHIP = pygame.image.load(os.path.join("assets", "pixel_ship_green_small.png"))
