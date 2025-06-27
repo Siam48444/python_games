@@ -26,6 +26,7 @@ TEXT_COLOR = (255, 255, 255)
 MAIN_FONT = pygame.font.SysFont("Arial", 30)
 
 PLAYER_VELOCITY = 5
+PLAYER_WIDTH, PLAYER_HEIGHT = 50, 50
 
 
 class Ship():
@@ -39,7 +40,7 @@ class Ship():
 		self.cool_down_counter = 0
 
 	def draw(self, window):
-		pygame.draw.rect(window, (255, 0, 0), (self.x, self.y, 50, 50))
+		pygame.draw.rect(window, (255, 0, 0), (self.x, self.y, PLAYER_WIDTH, PLAYER_HEIGHT))
 
 
 def main():
@@ -47,8 +48,7 @@ def main():
 	FPS = 90
 	lives = 5
 	level = 1
-
-	ship = Ship(300, 500)
+	player_ship = Ship((WIDTH - PLAYER_WIDTH) / 2, HEIGHT - PLAYER_HEIGHT - 20)
 
 
 	def draw_window():
@@ -59,7 +59,7 @@ def main():
 		WINDOW.blit(lives_label, (10, 10))
 		WINDOW.blit(level_label, (WIDTH - level_label.get_width() - 10, 10))
 
-		ship.draw(WINDOW)
+		player_ship.draw(WINDOW)
 
 		pygame.display.update()
 
@@ -74,13 +74,13 @@ def main():
 
 		keys = pygame.key.get_pressed()
 		if keys[pygame.K_a] or keys[pygame.K_LEFT]:
-			ship.x -= PLAYER_VELOCITY
+			player_ship.x -= PLAYER_VELOCITY
 		if keys[pygame.K_d] or keys[pygame.K_RIGHT]:
-			ship.x += PLAYER_VELOCITY
+			player_ship.x += PLAYER_VELOCITY
 		if keys[pygame.K_w] or keys[pygame.K_UP]:
-			ship.y -= PLAYER_VELOCITY
+			player_ship.y -= PLAYER_VELOCITY
 		if keys[pygame.K_s] or keys[pygame.K_DOWN]:
-			ship.y += PLAYER_VELOCITY
+			player_ship.y += PLAYER_VELOCITY
 
 
 	pygame.quit()	
