@@ -32,6 +32,7 @@ def main():
 	lives = 5
 	level = 1
 
+
 	def draw_window():
 		WINDOW.fill(BG_COLOR)
 	
@@ -42,11 +43,11 @@ def main():
 
 		pygame.display.update()
 
+
 	run = True
 	while run:
 		clock.tick(FPS)
 		draw_window()
-
 		for event in pygame.event.get():
 			if event.type == pygame.QUIT:
 				run = False
