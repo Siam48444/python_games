@@ -51,6 +51,20 @@ class Player(Ship):
 		self.max_health = health
 
 
+class Enemy(Ship):
+	COLOR_MAP = {
+		"red": (RED_SPACESHIP, RED_LASER),
+		"green": (GREEN_SPACESHIP, GREEN_LASER),
+		"blue": (BLUE_SPACESHIP, BLUE_LASER),
+	}
+
+	def __init__(self, x, y, color, health=100):
+		super()__init__(x, y, health)
+		self.ship_img, self.laser_img = self.COLOR_MAP[color]
+		self.mask = pygame.mask.from_surface(self.ship_img)
+
+
+
 def main():
 	clock = pygame.time.Clock()
 	FPS = 90
