@@ -26,6 +26,17 @@ TEXT_COLOR = (255, 255, 255)
 MAIN_FONT = pygame.font.SysFont("Arial", 30)
 
 
+class Ship():
+	def __init__(self, x, y, health=100):
+		self.x = x
+		self.y = y
+		self.health = health
+		self.ship_image = None
+		self.laser_img = None
+		self.lasers = []
+		self.cool_down_counter = 0
+
+
 def main():
 	clock = pygame.time.Clock()
 	FPS = 90
@@ -35,12 +46,10 @@ def main():
 
 	def draw_window():
 		WINDOW.fill(BG_COLOR)
-	
 		lives_label = MAIN_FONT.render(f"Life: {lives}", True, TEXT_COLOR)
 		level_label = MAIN_FONT.render(f"Level: {level}", True, TEXT_COLOR)
 		WINDOW.blit(lives_label, (10, 10))
 		WINDOW.blit(level_label, (WIDTH - level_label.get_width() - 10, 10))
-
 		pygame.display.update()
 
 
