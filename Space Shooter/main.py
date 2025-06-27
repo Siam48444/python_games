@@ -10,11 +10,13 @@ WIDTH, HEIGHT = 800, 800
 WINDOW = pygame.display.set_mode((WIDTH, HEIGHT))
 TITLE = pygame.display.set_caption("Space Shooter")
 
-# Load the images
+PLAYER_VELOCITY = 5
+PLAYER_WIDTH, PLAYER_HEIGHT = 70, 70
+
 RED_SPACESHIP = pygame.image.load(os.path.join("assets", "pixel_ship_red_small.png"))
 GREEN_SPACESHIP = pygame.image.load(os.path.join("assets", "pixel_ship_green_small.png"))
 BLUE_SPACESHIP = pygame.image.load(os.path.join("assets", "pixel_ship_blue_small.png"))
-YELLOW_SPACESHIP = pygame.image.load(os.path.join("assets", "pixel_ship_yellow.png")) # Player
+YELLOW_SPACESHIP = pygame.transform.scale(pygame.image.load(os.path.join("assets", "pixel_ship_yellow.png")), (PLAYER_WIDTH, PLAYER_HEIGHT))
 
 RED_LASER = pygame.image.load(os.path.join("assets", "pixel_laser_red.png"))
 GREEN_LASER = pygame.image.load(os.path.join("assets", "pixel_laser_green.png"))
@@ -24,9 +26,6 @@ YELLOW_LASER = pygame.image.load(os.path.join("assets", "pixel_laser_yellow.png"
 BG_COLOR = (0, 0, 0)
 TEXT_COLOR = (255, 255, 255)
 MAIN_FONT = pygame.font.SysFont("Arial", 30)
-
-PLAYER_VELOCITY = 5
-PLAYER_WIDTH, PLAYER_HEIGHT = 50, 50
 
 
 class Ship():
@@ -57,7 +56,7 @@ def main():
 	FPS = 90
 	lives = 5
 	level = 1
-	player_ship = Ship((WIDTH - PLAYER_WIDTH) / 2, HEIGHT - PLAYER_HEIGHT - 20)
+	player_ship = Player((WIDTH - PLAYER_WIDTH) / 2, HEIGHT - PLAYER_HEIGHT - 20)
 
 
 	def draw_window():
