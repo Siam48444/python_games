@@ -36,6 +36,9 @@ class Ship():
 		self.lasers = []
 		self.cool_down_counter = 0
 
+	def draw(self, window):
+		pygame.draw.rect(window, (255, 0, 0), (self.x, self.y, 50, 50))
+
 
 def main():
 	clock = pygame.time.Clock()
@@ -43,13 +46,19 @@ def main():
 	lives = 5
 	level = 1
 
+	ship = Ship(300, 500)
+
 
 	def draw_window():
 		WINDOW.fill(BG_COLOR)
+		
 		lives_label = MAIN_FONT.render(f"Life: {lives}", True, TEXT_COLOR)
 		level_label = MAIN_FONT.render(f"Level: {level}", True, TEXT_COLOR)
 		WINDOW.blit(lives_label, (10, 10))
 		WINDOW.blit(level_label, (WIDTH - level_label.get_width() - 10, 10))
+
+		ship.draw(WINDOW)
+
 		pygame.display.update()
 
 
