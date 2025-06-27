@@ -25,6 +25,8 @@ BG_COLOR = (0, 0, 0)
 TEXT_COLOR = (255, 255, 255)
 MAIN_FONT = pygame.font.SysFont("Arial", 30)
 
+PLAYER_VELOCITY = 5
+
 
 class Ship():
 	def __init__(self, x, y, health=100):
@@ -69,6 +71,17 @@ def main():
 		for event in pygame.event.get():
 			if event.type == pygame.QUIT:
 				run = False
+
+		keys = pygame.key.get_pressed()
+		if keys[pygame.K_a] or keys[pygame.K_LEFT]:
+			ship.x -= PLAYER_VELOCITY
+		if keys[pygame.K_d] or keys[pygame.K_RIGHT]:
+			ship.x += PLAYER_VELOCITY
+		if keys[pygame.K_w] or keys[pygame.K_UP]:
+			ship.y -= PLAYER_VELOCITY
+		if keys[pygame.K_s] or keys[pygame.K_DOWN]:
+			ship.y += PLAYER_VELOCITY
+
 
 	pygame.quit()	
 
