@@ -22,17 +22,24 @@ BLUE_LASER = pygame.image.load(os.path.join("assets", "pixel_laser_blue.png"))
 YELLOW_LASER = pygame.image.load(os.path.join("assets", "pixel_laser_yellow.png"))
 
 BG_COLOR = (0, 0, 0)
+TEXT_COLOR = (255, 255, 255)
+MAIN_FONT = pygame.font.SysFont("Arial", 30)
 
 
 def main():
-	FPS = 90
 	clock = pygame.time.Clock()
-
-	level = 1
+	FPS = 90
 	lives = 5
+	level = 1
 
 	def draw_window():
 		WINDOW.fill(BG_COLOR)
+	
+		lives_label = MAIN_FONT.render(f"Life: {lives}", True, TEXT_COLOR)
+		level_label = MAIN_FONT.render(f"Level: {level}", True, TEXT_COLOR)
+		WINDOW.blit(lives_label, (10, 10))
+		WINDOW.blit(level_label, (WIDTH - level_label.get_width() - 10, 10))
+
 		pygame.display.update()
 
 	run = True
