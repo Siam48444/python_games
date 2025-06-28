@@ -80,6 +80,7 @@ def main():
 	wave_length = 0
 	enemy_velocity = 0.7
 	lost = False
+	lost_count = 0
 
 
 	def draw_window():
@@ -103,13 +104,21 @@ def main():
 	run = True
 	while run:
 		clock.tick(FPS)
+		draw_window()
 
 		if lives <= 0 or player_ship.health <= 0:
 			lost = True
+			lost_count += 1
+
+		if lost:
+			if lost_count > FPS * 3:
+				run = False
+			else:
+				continue
 
 		if len(enemies) == 0:
 			level += 1
-			wave_length += 4
+			wave_length += 3
 			enemy_velocity += 0.1
 			for i in range(wave_length):
 				enemy = Enemy(
@@ -133,13 +142,11 @@ def main():
 		if (keys[pygame.K_s] or keys[pygame.K_DOWN]) and player_ship.y < HEIGHT - PLAYER_HEIGHT:
 			player_ship.y += PLAYER_VELOCITY
 
-		for enemy in enemies:
+		for enemy in enemies[:]:
 			enemy.move(enemy_velocity)
 			if enemy.y > HEIGHT:
 				enemies.remove(enemy)
 				lives -= 1
-
-		draw_window()
 	pygame.quit()	
 
 
