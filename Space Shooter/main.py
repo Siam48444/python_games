@@ -16,7 +16,9 @@ PLAYER_WIDTH, PLAYER_HEIGHT = 70, 70
 RED_SPACESHIP = pygame.image.load(os.path.join("assets", "pixel_ship_red_small.png"))
 GREEN_SPACESHIP = pygame.image.load(os.path.join("assets", "pixel_ship_green_small.png"))
 BLUE_SPACESHIP = pygame.image.load(os.path.join("assets", "pixel_ship_blue_small.png"))
-YELLOW_SPACESHIP = pygame.transform.scale(pygame.image.load(os.path.join("assets", "pixel_ship_yellow.png")), (PLAYER_WIDTH, PLAYER_HEIGHT))
+YELLOW_SPACESHIP = pygame.transform.scale(
+	pygame.image.load(os.path.join("assets", "pixel_ship_yellow.png")), (PLAYER_WIDTH, PLAYER_HEIGHT)
+)
 
 RED_LASER = pygame.image.load(os.path.join("assets", "pixel_laser_red.png"))
 GREEN_LASER = pygame.image.load(os.path.join("assets", "pixel_laser_green.png"))
@@ -59,7 +61,7 @@ class Enemy(Ship):
 	}
 
 	def __init__(self, x, y, color, health=100):
-		super()__init__(x, y, health)
+		super().__init__(x, y, health)
 		self.ship_img, self.laser_img = self.COLOR_MAP[color]
 		self.mask = pygame.mask.from_surface(self.ship_img)
 
@@ -73,19 +75,16 @@ def main():
 	FPS = 90
 	lives = 5
 	level = 1
-	player_ship = Player((WIDTH - PLAYER_WIDTH) / 2, HEIGHT - PLAYER_HEIGHT - 20)
+	player_ship = Player((WIDTH - PLAYER_WIDTH) / 2, HEIGHT - PLAYER_HEIGHT - 50)
 
 
 	def draw_window():
 		WINDOW.fill(BG_COLOR)
-		
 		lives_label = MAIN_FONT.render(f"Life: {lives}", True, TEXT_COLOR)
 		level_label = MAIN_FONT.render(f"Level: {level}", True, TEXT_COLOR)
 		WINDOW.blit(lives_label, (10, 10))
 		WINDOW.blit(level_label, (WIDTH - level_label.get_width() - 10, 10))
-
 		player_ship.draw(WINDOW)
-
 		pygame.display.update()
 
 
@@ -106,7 +105,6 @@ def main():
 			player_ship.y -= PLAYER_VELOCITY
 		if (keys[pygame.K_s] or keys[pygame.K_DOWN]) and player_ship.y < HEIGHT - PLAYER_HEIGHT:
 			player_ship.y += PLAYER_VELOCITY
-
 
 	pygame.quit()	
 
