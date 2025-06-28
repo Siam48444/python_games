@@ -45,6 +45,12 @@ class Laser:
 	def move(self, vel):
 		self.y += vel
 
+	def off_screen(self, height):
+		return self.y < height and self.y > 0
+
+	def collision(self, obj):
+		return collide(self, obj)
+
 
 class Ship():
 	def __init__(self, x, y, health=100):
@@ -83,6 +89,10 @@ class Enemy(Ship):
 
 	def move(self, vel):
 		self.y += vel
+
+
+def collide(obj1, obj2):
+	
 
 
 def main():
