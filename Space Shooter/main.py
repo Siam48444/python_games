@@ -28,6 +28,7 @@ YELLOW_LASER = pygame.image.load(os.path.join("assets", "pixel_laser_yellow.png"
 BG_COLOR = (0, 0, 0)
 TEXT_COLOR = (255, 255, 255)
 MAIN_FONT = pygame.font.SysFont("Arial", 30)
+LOST_FONT = pygame.font.SysFont("Arial", 80)
 FPS = 90
 
 
@@ -73,11 +74,12 @@ class Enemy(Ship):
 def main():
 	clock = pygame.time.Clock()
 	lives = 5
-	level = 1
+	level = 0
 	player_ship = Player((WIDTH - PLAYER_WIDTH) / 2, HEIGHT - PLAYER_HEIGHT - 50)
 	enemies = []
 	wave_length = 0
-	enemy_velocity = 0.2
+	enemy_velocity = 0.7
+	lost = False
 
 
 	def draw_window():
@@ -90,6 +92,10 @@ def main():
 		for enemy in enemies:
 			enemy.draw(WINDOW)
 
+		if lost:
+			lost_label = LOST_FONT.render("You lost!!!", True, TEXT_COLOR)
+			WINDOW.blit(lost_label, ((WIDTH - lost_label.get_width()) / 2, (HEIGHT - lost_label.get_height()) / 2))
+
 		player_ship.draw(WINDOW)
 		pygame.display.update()
 
@@ -98,10 +104,13 @@ def main():
 	while run:
 		clock.tick(FPS)
 
+		if lives <= 0 or player_ship.health <= 0:
+			lost = True
+
 		if len(enemies) == 0:
 			level += 1
-			wave_length += 2
-			enemy_velocity += 0.5
+			wave_length += 4
+			enemy_velocity += 0.1
 			for i in range(wave_length):
 				enemy = Enemy(
 					random.randrange(50, WIDTH - 50), 
@@ -128,6 +137,7 @@ def main():
 			enemy.move(enemy_velocity)
 			if enemy.y > HEIGHT:
 				enemies.remove(enemy)
+				lives -= 1
 
 		draw_window()
 	pygame.quit()	
