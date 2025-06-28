@@ -76,8 +76,8 @@ def main():
 	level = 1
 	player_ship = Player((WIDTH - PLAYER_WIDTH) / 2, HEIGHT - PLAYER_HEIGHT - 50)
 	enemies = []
-	wave_length = 5
-	enemy_velocity = 1
+	wave_length = 0
+	enemy_velocity = 0.5
 
 
 	def draw_window():
@@ -105,7 +105,7 @@ def main():
 			for i in range(wave_length):
 				enemy = Enemy(
 					random.randrange(50, WIDTH - 50), 
-					random.randrange(-1500, -150), 
+					random.randrange(-1000, -100), 
 					random.choice(["red", "blue", "green"])
 				)
 				enemies.append(enemy)
