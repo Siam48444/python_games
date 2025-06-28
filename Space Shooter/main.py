@@ -28,6 +28,7 @@ YELLOW_LASER = pygame.image.load(os.path.join("assets", "pixel_laser_yellow.png"
 BG_COLOR = (0, 0, 0)
 TEXT_COLOR = (255, 255, 255)
 MAIN_FONT = pygame.font.SysFont("Arial", 30)
+FPS = 90
 
 
 class Ship():
@@ -69,13 +70,14 @@ class Enemy(Ship):
 		self.y += vel
 
 
-
 def main():
 	clock = pygame.time.Clock()
-	FPS = 90
 	lives = 5
 	level = 1
 	player_ship = Player((WIDTH - PLAYER_WIDTH) / 2, HEIGHT - PLAYER_HEIGHT - 50)
+	enemies = []
+	wave_length = 5
+	enemy_velocity = 1
 
 
 	def draw_window():
@@ -84,6 +86,10 @@ def main():
 		level_label = MAIN_FONT.render(f"Level: {level}", True, TEXT_COLOR)
 		WINDOW.blit(lives_label, (10, 10))
 		WINDOW.blit(level_label, (WIDTH - level_label.get_width() - 10, 10))
+
+		for enemy in enemies:
+			enemy.draw(WINDOW)
+
 		player_ship.draw(WINDOW)
 		pygame.display.update()
 
@@ -91,7 +97,19 @@ def main():
 	run = True
 	while run:
 		clock.tick(FPS)
-		draw_window()
+
+		if len(enemies) == 0:
+			level += 1
+			wave_length += 5
+			enemy_velocity += 2
+			for i in range(wave_length):
+				enemy = Enemy(
+					random.randrange(50, WIDTH - 50), 
+					random.randrange(-1500, -150), 
+					random.choice(["red", "blue", "green"])
+				)
+				enemies.append(enemy)
+
 		for event in pygame.event.get():
 			if event.type == pygame.QUIT:
 				run = False
@@ -106,6 +124,10 @@ def main():
 		if (keys[pygame.K_s] or keys[pygame.K_DOWN]) and player_ship.y < HEIGHT - PLAYER_HEIGHT:
 			player_ship.y += PLAYER_VELOCITY
 
+		for enemy in enemies:
+			enemy.y += enemy_velocity
+
+		draw_window()
 	pygame.quit()	
 
 
