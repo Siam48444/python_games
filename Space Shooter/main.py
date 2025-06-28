@@ -32,6 +32,20 @@ LOST_FONT = pygame.font.SysFont("Arial", 80)
 FPS = 90
 
 
+class Laser:
+	def __init__(self, x, y, img):
+		self.x = x
+		self.y = y
+		self.img = img
+		self.mask = pygame.mask.from_surface(self.img)
+
+	def draw(self, window):
+		window.blit(self.ship_img, (self.x, self.y))
+
+	def move(self, vel):
+		self.y += vel
+
+
 class Ship():
 	def __init__(self, x, y, health=100):
 		self.x = x
