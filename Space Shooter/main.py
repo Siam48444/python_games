@@ -77,7 +77,7 @@ def main():
 	player_ship = Player((WIDTH - PLAYER_WIDTH) / 2, HEIGHT - PLAYER_HEIGHT - 50)
 	enemies = []
 	wave_length = 0
-	enemy_velocity = 0.5
+	enemy_velocity = 0.2
 
 
 	def draw_window():
@@ -100,8 +100,8 @@ def main():
 
 		if len(enemies) == 0:
 			level += 1
-			wave_length += 5
-			enemy_velocity += 2
+			wave_length += 2
+			enemy_velocity += 0.5
 			for i in range(wave_length):
 				enemy = Enemy(
 					random.randrange(50, WIDTH - 50), 
@@ -125,7 +125,9 @@ def main():
 			player_ship.y += PLAYER_VELOCITY
 
 		for enemy in enemies:
-			enemy.y += enemy_velocity
+			enemy.move(enemy_velocity)
+			if enemy.y > HEIGHT:
+				enemies.remove(enemy)
 
 		draw_window()
 	pygame.quit()	
